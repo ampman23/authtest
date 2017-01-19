@@ -46,7 +46,7 @@
 			function confirmPayment(nonce) {
         var secureData = {name:"testtransaction",transactionKey:"1234",transactionType:"authCaptureTransaction",amount:"75",dataDescriptor:"COMMON.ACCEPT.INAPP.PAYMENT",dataValue:nonce};
         console.log ("Data " + secureData.transactionType + secureData.amount + secureData.dataDescriptor + secureData.dataValue);
-        Accept.createTransactionRequest2(secureData, 'responsePaymentHandler');
+        Accept.dispatchData(secureData, 'responsePaymentHandler');
       }
 
       function responsePaymentHandler(response) {
