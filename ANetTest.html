@@ -6,7 +6,7 @@
 		<form>
 			<button type="submit" onclick="sendPaymentDataToAnet();return false;">Pay</button>
 		</form>
-		
+
 		<script>
 			function sendPaymentDataToAnet() {
         var secureData = {}, authData = {}, cardData = {};
@@ -24,6 +24,7 @@
 			}
 
       function responseHandler(response) {
+	  console.log ("responseHandler");
           if (response.messages.resultCode === 'Error') {
               for (var i = 0; i < response.messages.message.length; i++) {
                   console.log ("4" + i);
@@ -49,6 +50,7 @@
       }
 
       function responsePaymentHandler(response) {
+	      console.log ("responsePaymentHandler");
         if (response.messages.resultCode === 'Error') {
               for (var i = 0; i < response.messages.message.length; i++) {
                 console.log(response.messages.message[i].code + ':' + response.messages.message[i].text);
