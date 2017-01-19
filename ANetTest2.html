@@ -45,7 +45,13 @@
 		
 			function confirmPayment(nonce) {
         var secureData = {name:"testtransaction",transactionKey:"1234",transactionType:"authCaptureTransaction",amount:"75",dataDescriptor:"COMMON.ACCEPT.INAPP.PAYMENT",dataValue:nonce};
-        console.log ("Data " + secureData.transactionType + secureData.amount + secureData.dataDescriptor + secureData.dataValue);
+        var cardData = {};
+				cardData.cardNumber = "5424000000000015";//document.getElementById('CARDNUMBER_ID').value;
+        cardData.month = "12";//document.getElementById('EXPIRY_MONTH_ID').value;
+        cardData.year = "18";//document.getElementById('EXPIRY_YEAR_ID').value;
+        secureData.cardData = cardData;
+				
+				console.log ("Data " + secureData.transactionType + secureData.amount + secureData.dataDescriptor + secureData.dataValue);
         Accept.dispatchData(secureData, 'responsePaymentHandler');
       }
 
