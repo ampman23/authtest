@@ -51,6 +51,10 @@ function useOpaqueData(responseData) {
 				console.log ("7");
 	var secureData = {name:"testtransaction",transactionKey:"1234",transactionType:"authCaptureTransaction",amount:"75",dataDescriptor:"COMMON.ACCEPT.INAPP.PAYMENT",dataValue:nonce};
 				console.log ("7a");
+	var authData = {};
+	authData.clientKey = '6WrfHGS76gHW3v7btBCE3HuuBukej96Ztfn5R32G5ep42vne7MCWZtAucY';
+	authData.apiLoginID = 'my_api_login_id';
+	secureData.authData = authData;
 	/*
 	secureData.amount = '75';
 				console.log ("7b");
