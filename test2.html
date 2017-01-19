@@ -49,18 +49,19 @@ function useOpaqueData(responseData) {
 		
 			function confirmPayment(nonce) {
 				console.log ("7");
-	var secureData2 = {transactionType:"authCaptureTransaction",amount:"",dataDescriptor:"",dataValue:""};
+	var secureData = {transactionType:"authCaptureTransaction",amount:"75",dataDescriptor:"COMMON.ACCEPT.INAPP.PAYMENT",dataValue:nonce};
 				console.log ("7a");
-	secureData2.amount = '75';
+	/*
+	secureData.amount = '75';
 				console.log ("7b");
-	secureData2.dataDescriptor = 'COMMON.ACCEPT.INAPP.PAYMENT';
+	secureData.dataDescriptor = 'COMMON.ACCEPT.INAPP.PAYMENT';
 				console.log ("7c");
-	secureData2.dataValue = nonce;
+	secureData.dataValue = nonce;
 				console.log ("7d");
-
-	console.log ("8" + secureData2);
-	Accept.dispatchData(secureData2, 'responsePaymentHandler');
-			}
+	*/
+	console.log ("8" + secureData.transactionType + secureData.amount + secureData.dataDescriptor + secureData.dataValue);
+	Accept.dispatchData(secureData, 'responsePaymentHandler');
+}
 
 function responsePaymentHandler(response) {
 	console.log ("9");
