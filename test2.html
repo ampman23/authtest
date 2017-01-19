@@ -1,9 +1,10 @@
 <html>
 	<head>
-		<script type="text/javascript" src="https://jstest.authorize.net/v1/Accept.js" charset="utf-8"></script>
+		
 	</head>
 	<body>
-	
+	<script type="text/javascript" src="https://jstest.authorize.net/v1/Accept.js" charset="utf-8"></script>
+		10:00 pm
 		<form>
 			<button type="submit" onclick="sendPaymentDataToAnet();return false;">Pay</button>
 		</form>
@@ -42,9 +43,9 @@ function useOpaqueData(responseData) {
 	console.log ("6");
     // This is where you would set the data descriptor & data value to be posted back to your server
     console.log(responseData.dataDescriptor);
-    console.log(responseData.dataValue);
+    console.log(responseData.opaqueData);
     //alert(responseData.dataValue);
-	confirmPayment(responseData.dataValue);
+	confirmPayment(responseData.opaqueData);
 }
 		
 			function confirmPayment(nonce) {
