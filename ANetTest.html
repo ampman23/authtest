@@ -1,0 +1,64 @@
+<html>
+	<head>
+    	<script type="text/javascript" src="https://jstest.authorize.net/v1/Accept.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<form>
+			<button type="submit" onclick="sendPaymentDataToAnet();return false;">Pay</button>
+		</form>
+		
+		<script>
+			function sendPaymentDataToAnet() {
+        var secureData = {}, authData = {}, cardData = {};
+
+        cardData.cardNumber = "5424000000000015";//document.getElementById('CARDNUMBER_ID').value;
+        cardData.month = "12";//document.getElementById('EXPIRY_MONTH_ID').value;
+        cardData.year = "18";//document.getElementById('EXPIRY_YEAR_ID').value;
+        secureData.cardData = cardData;
+
+        authData.clientKey = '8eT7NRm69ugUgG39R33jP3r9fY3UE3KH7jnyA7mkVtTq4gr8A9J8kjbL5GjSjXcz';
+        authData.apiLoginID = '3KKAue4S32fk';
+        secureData.authData = authData;
+        console.log ("1");
+        Accept.dispatchData(secureData, 'responseHandler');
+			}
+
+      function responseHandler(response) {
+          if (response.messages.resultCode === 'Error') {
+              for (var i = 0; i < response.messages.message.length; i++) {
+                  console.log ("4" + i);
+                  console.log(response.messages.message[i].code + ':' + response.messages.message[i].text);
+              }
+          } else {
+              useOpaqueData(response.opaqueData)
+          }
+      }
+
+      function useOpaqueData(responseData) {
+          // This is where you would set the data descriptor & data value to be posted back to your server
+          console.log(responseData.dataDescriptor);
+          console.log(responseData.dataValue);
+          //alert(responseData.dataValue);
+          confirmPayment(responseData.dataValue);
+      }
+		
+			function confirmPayment(nonce) {
+        var secureData = {name:"testtransaction",transactionKey:"1234",transactionType:"authCaptureTransaction",amount:"75",dataDescriptor:"COMMON.ACCEPT.INAPP.PAYMENT",dataValue:nonce};
+        console.log ("Data " + secureData.transactionType + secureData.amount + secureData.dataDescriptor + secureData.dataValue);
+        Accept.createTransactionRequest(secureData, 'responsePaymentHandler');
+      }
+
+      function responsePaymentHandler(response) {
+        if (response.messages.resultCode === 'Error') {
+              for (var i = 0; i < response.messages.message.length; i++) {
+                console.log(response.messages.message[i].code + ':' + response.messages.message[i].text);
+              }
+          } else {
+            console.log ("11 complete");
+
+          }
+      }
+		</script>
+
+	</body>
+</html>
